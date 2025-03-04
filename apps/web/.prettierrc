@@ -1,0 +1,24 @@
+{
+  "plugins": [
+    "@trivago/prettier-plugin-sort-imports",
+    "prettier-plugin-tailwindcss",
+    "prettier-plugin-classnames"
+  ],
+  "printWidth": 80,
+  "tabWidth": 2,
+  "trailingComma": "all",
+  "singleQuote": true,
+  "semi": true,
+  "importOrder": [
+    "^@core/(.*)$",
+    "^@server/(.*)$",
+    "^@/(.*)$",
+    "^@ui/(.*)$",
+    "^[./]"
+  ],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true,
+  "tailwindConfig": "./tailwind.config.ts",
+  "tailwindAttributes": ["className", "class", "cx"],
+  "tailwindFunctions": ["clsx", "cn"]
+}
