@@ -1,2 +1,2 @@
-export { loginWithPassword } from './loginWithPassword'
-export { signUpWithEmail } from './signUpWithEmail'
+export { loginWithPassword } from './loginWithPassword';
+export { signUpWithEmail } from './signUpWithEmail';

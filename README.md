@@ -2,7 +2,6 @@
 
 Pre-built components for Supabase without the hassle, built with Next.js and Tailwind CSS.
 
-
 <!-- # Turborepo starter
 
 This Turborepo starter is maintained by the Turborepo core team.

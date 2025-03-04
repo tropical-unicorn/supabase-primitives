@@ -1,4 +1,4 @@
-import { createClient } from "../utils/supabase/server";
+import { createClient } from '../utils/supabase/server';
 
 export const signUpWithEmail = async (email: string, password: string) => {
   const supabase = await createClient();
@@ -6,4 +6,4 @@ export const signUpWithEmail = async (email: string, password: string) => {
     email,
     password,
   });
-};      
+};
