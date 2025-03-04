@@ -6,7 +6,12 @@ import { zodResolver } from '@hookform/resolvers/zod';
 
 const schema = z.object({
   email: z.string().email(),
-  password: z.string().min(8),
+  password: z
+      .string()
+      .min(8, 'Password must be at least 8 characters')
+      .regex(/[A-Z]/, 'Password must contain at least one uppercase letter')
+      .regex(/[a-z]/, 'Password must contain at least one lowercase letter')
+      .regex(/[0-9]/, 'Password must contain at least one number'),
 });
 
 const LoginWithPassword = () => {
@@ -15,7 +20,8 @@ const LoginWithPassword = () => {
     register,
     formState: { errors },
   } = useForm<z.infer<typeof schema>>({
-    resolver: zodResolver(schema),
+      resolver: zodResolver(schema),
+      mode: 'onBlur'
   });
 
   const onSubmit = (data: any) => {
@@ -25,7 +31,11 @@ const LoginWithPassword = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <input {...register('email')} />
-      <input {...register('password')} />
+          <input {...register('password')} />
+          <div>
+            {errors.email && (<span>{errors.email.message}</span>)}
+            {errors.password && (<span>{errors.password.message}</span>)}
+          </div>
       <button type="submit">Login</button>
     </form>
   );
