@@ -14,7 +14,7 @@ const geistMono = localFont({
 
 export const metadata: Metadata = {
   title: 'Supabase Primitives - by Tropical Unicorn',
-  description: 'Supabase Primitives',
+  description: 'Supabase Primitives - by Tropical Unicorn v1',
 };
 
 export default function RootLayout({
