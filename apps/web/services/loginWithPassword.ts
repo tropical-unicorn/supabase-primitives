@@ -6,4 +6,10 @@ export const loginWithPassword = async (email: string, password: string) => {
     email,
     password,
   });
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  return data;
 };
