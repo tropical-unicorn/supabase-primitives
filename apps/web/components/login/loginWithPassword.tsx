@@ -3,6 +3,8 @@
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { loginWithPasswordAction } from '@/services/loginWithPassword';
+import { useRouter } from 'next/navigation';
 
 const schema = z.object({
   email: z.string().email(),
@@ -15,6 +17,7 @@ const schema = z.object({
 });
 
 const LoginWithPassword = () => {
+  const router = useRouter();
   const {
     handleSubmit,
     register,
@@ -24,8 +27,20 @@ const LoginWithPassword = () => {
     mode: 'onBlur',
   });
 
-  const onSubmit = (data: z.infer<typeof schema>) => {
-    console.log(data);
+  const onSubmit = async (data: z.infer<typeof schema>) => {
+    if (errors) {
+      console.error(errors);
+    }
+
+    const res = await loginWithPasswordAction(data);
+
+    if (res?.validationErrors) {
+      // Alert user that there is an error, error logging, or restart form
+      console.error(res.validationErrors);
+    }
+
+    // Redirect to secure page
+    router.push('/secure');
   };
 
   return (
