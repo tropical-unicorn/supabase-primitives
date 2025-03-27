@@ -1,4 +1,4 @@
-import LoginWithPassword from '@/components/login/loginWithPassword';
+import LoginWithPassword from '@/components/__loginWithProvider/email-password/loginWithPassword';
 
 const LoginPage = () => {
   return (
