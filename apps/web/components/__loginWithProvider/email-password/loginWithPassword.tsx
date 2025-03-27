@@ -1,10 +1,10 @@
 'use client';
 
+import { loginWithPasswordAction } from '@/services/loginWithPassword';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { loginWithPasswordAction } from '@/services/loginWithPassword';
-import { useRouter } from 'next/navigation';
 
 const schema = z.object({
   email: z.string().email(),
@@ -29,7 +29,7 @@ const LoginWithPassword = () => {
 
   const onSubmit = async (data: z.infer<typeof schema>) => {
     if (errors) {
-      console.error(errors);
+      return console.error(errors);
     }
 
     const res = await loginWithPasswordAction(data);
@@ -45,13 +45,13 @@ const LoginWithPassword = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <input {...register('email')} className="border-2 border-gray-400" />
-      <input {...register('password')} className="border-2 border-gray-400" />
+      <input {...register('email')} className='border-2 border-gray-400' />
+      <input {...register('password')} className='border-2 border-gray-400' />
       <div>
         {errors.email && <span>{errors.email.message}</span>}
         {errors.password && <span>{errors.password.message}</span>}
       </div>
-      <button type="submit">Login</button>
+      <button type='submit'>Login</button>
     </form>
   );
 };
