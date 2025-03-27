@@ -9,6 +9,7 @@ const Logout = () => {
   const handleLogout = async () => {
     const supabase = await createClient();
     await supabase.auth.signOut();
+
     router.push('/login');
   };
 

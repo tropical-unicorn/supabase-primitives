@@ -3,8 +3,8 @@
 import { returnValidationErrors } from 'next-safe-action';
 import { z } from 'zod';
 
-import { createClient } from '@/utils/supabase/server';
 import { actionClient } from '@/services/safe-action';
+import { createClient } from '@/utils/supabase/server';
 
 const schema = z.object({
   email: z.string(),
@@ -31,12 +31,33 @@ export const loginWithPasswordAction = actionClient
         });
       }
 
-
       return data;
     },
     {
       onError: async (error) => {
         console.error(error);
       },
-    },
+      onSuccess: async (data) => {
+        // Sanitize sensitive data before logging
+        const sanitizedData = {
+          ...data,
+          user: data?.data?.user
+            ? {
+                ...data.data.user,
+                email: '[REDACTED]',
+              }
+            : null,
+          session: data?.data?.session
+            ? {
+                ...data.data.session,
+                user: {
+                  ...data.data.session.user,
+                  email: '[REDACTED]',
+                },
+              }
+            : null,
+        };
+        console.log('Authentication successful:', sanitizedData);
+      },
+    }
   );
