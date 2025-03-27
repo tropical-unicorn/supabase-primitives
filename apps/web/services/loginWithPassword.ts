@@ -38,7 +38,26 @@ export const loginWithPasswordAction = actionClient
         console.error(error);
       },
       onSuccess: async (data) => {
-        console.log(data);
+        // Sanitize sensitive data before logging
+        const sanitizedData = {
+          ...data,
+          user: data?.data?.user
+            ? {
+                ...data.data.user,
+                email: '[REDACTED]',
+              }
+            : null,
+          session: data?.data?.session
+            ? {
+                ...data.data.session,
+                user: {
+                  ...data.data.session.user,
+                  email: '[REDACTED]',
+                },
+              }
+            : null,
+        };
+        console.log('Authentication successful:', sanitizedData);
       },
     }
   );
